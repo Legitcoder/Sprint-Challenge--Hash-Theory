@@ -17,8 +17,8 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
     int difference = limit - weights[i];
     int index = hash_table_retrieve(ht, difference);
     if(index > 0){
-      answer->index_1 = index;
-      answer->index_2 = i;
+      answer->index_1 = index > i ? index : i;
+      answer->index_2 = i < index ? i : index;
       destroy_hash_table(ht);
       return answer;
     }

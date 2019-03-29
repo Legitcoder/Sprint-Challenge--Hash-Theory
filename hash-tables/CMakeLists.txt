@@ -3,4 +3,4 @@ project(Sprint-Challenge--Hash-Theory C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(Sprint-Challenge--Hash-Theory ex2/ex2.c)
+add_executable(Sprint-Challenge--Hash-Theory ex1/ex1.c)
