@@ -1,13 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "hashtable.h"
+//#include "hashtable.c"
 #include "ex1.h"
 
 Answer *get_indices_of_item_weights(int *weights, int length, int limit)
 {
   HashTable *ht = create_hash_table(16);
+  Answer *answer = malloc(sizeof(int) * 2);
 
-  // YOUR CODE HERE
+  for(int i = 0; i < length; i++){
+    hash_table_insert(ht, weights[i], i);
+  }
+
+  for(int i = 0; i < length; i++) {
+    int difference = limit - weights[i];
+    int index = hash_table_retrieve(ht, difference);
+    if(index > 0){
+      answer->index_1 = index > i ? index : i;
+      answer->index_2 = i < index ? i : index;
+      destroy_hash_table(ht);
+      return answer;
+    }
+  }
 
   return NULL;
 }
