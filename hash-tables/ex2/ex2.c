@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "hashtable.h"
+//#include "hashtable.c"
 #include "ex2.h"
 
 char **reconstruct_trip(Ticket **tickets, int length)
@@ -9,9 +10,29 @@ char **reconstruct_trip(Ticket **tickets, int length)
   HashTable *ht = create_hash_table(16);
   char **route = malloc(length * sizeof(char *));
 
-  // YOUR CODE HERE
+  for(int i = 0; i < length; i++){
+    hash_table_insert(ht, tickets[i]->source, tickets[i]->destination);
+  }
+
+  char *source = "NONE";
+
+  for(int i = 0; i < length; i++){
+    route[i] = strdup(hash_table_retrieve(ht,source));
+    source = strdup(route[i]);
+  }
+
+  destroy_hash_table(ht);
 
   return route;
+}
+
+
+void destroy_str_arr(char **str_arr, int length) {
+    for(int i = 0; i < length; i++){
+        free(str_arr[i]);
+    }
+
+    free(str_arr);
 }
 
 void print_route(char **route, int length)
